@@ -2,9 +2,7 @@
 #include "RocketStage.hpp"
 #include <fstream>
 
-
 class RocketSimulator{
-
 public:
     RocketSimulator(RocketStage stage, double dt);
     void run_simulation(std::ostream& out);
