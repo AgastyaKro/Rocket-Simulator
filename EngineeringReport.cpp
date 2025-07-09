@@ -1,7 +1,7 @@
 #include "EngineeringReport.hpp"
 #include <iostream>
 
-constexpr inline double GRAVITY = 9.81;
+constexpr double GRAVITY = 9.81;
 
 void print_engineering_report(const RocketStage& stage, double payload) {
     double m0 = stage.dry_mass + stage.fuel_mass;
