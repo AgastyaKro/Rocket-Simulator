@@ -1,6 +1,5 @@
 #pragma once
-
-constexpr double GRAVITY = 9.81;
+#include "Constants.hpp"
 
 struct RocketStage{
     double thrust;      // newtons
@@ -24,5 +23,6 @@ struct RocketStage{
     double get_thrust(double time){
         return (time <= burn_time ? thrust : 0); // no fuel after burn_time so no thrust
     }
+
 
 };

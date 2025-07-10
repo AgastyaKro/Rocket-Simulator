@@ -6,6 +6,8 @@
 
 struct RocketState;
 
-EngineeringMetrics print_engineering_report(const RocketStage& stage,
-                              const RocketState& initial_state,
-                              double payload_mass);
+void print_engineering_report(const EngineeringMetrics& metrics);
+
+EngineeringMetrics compute_engineering_metrics(const RocketStage& RocketStage_,
+                                              const RocketState& RocketState_,
+                                              double payload);

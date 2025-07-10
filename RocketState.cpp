@@ -1,6 +1,6 @@
 #include "RocketState.hpp"
-
-constexpr double GRAVITY = 9.81;
+#include <sstream>
+#include "Constants.hpp"
 
 RocketState compute_state(double time, double position, double velocity,
                           double fuel_mass, const RocketStage& stage) {
@@ -21,4 +21,18 @@ RocketState compute_state(double time, double position, double velocity,
     state.drag = 0.0;
 
     return state;
+}
+
+std::string RocketState::to_csv_row() const {
+    std::ostringstream ss;
+    ss << time << ","
+       << position << ","
+       << velocity << ","
+       << acceleration << ","
+       << acceleration_g << ","
+       << mass << ","
+       << fuel_mass << ","
+       << thrust << ","
+       << mass_flow_rate;
+    return ss.str();
 }

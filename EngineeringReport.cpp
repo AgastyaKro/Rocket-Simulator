@@ -1,7 +1,7 @@
 #include "EngineeringReport.hpp"
-#include <iostream>
+#include "Constants.hpp"
 
-constexpr double G0 = 9.81;
+#include <iostream>
 
 // Compute metrics
 EngineeringMetrics compute_engineering_metrics(const RocketStage& RocketStage_,
@@ -11,7 +11,7 @@ EngineeringMetrics compute_engineering_metrics(const RocketStage& RocketStage_,
 
     const double m0 = RocketStage_.dry_mass + RocketStage_.fuel_mass;
     const double mf = RocketState_.mass;               // after burn (initial_state == t0 -> mf == m0)
-    const double c  = RocketStage_.isp * G0;            // exhaust velocity
+    const double c  = RocketStage_.isp * GRAVITY;            // exhaust velocity
     const double mdot = RocketState_.mass_flow_rate;
     const double total_impulse = RocketState_.thrust * RocketStage_.burn_time;
 
@@ -22,9 +22,9 @@ EngineeringMetrics compute_engineering_metrics(const RocketStage& RocketStage_,
     m.mass_flow_rate           = mdot;
     m.thrust                   = RocketState_.thrust;
     m.total_impulse            = total_impulse;
-    m.impulse_to_weight_ratio  = total_impulse / ((m0 - payload) * G0);
+    m.impulse_to_weight_ratio  = total_impulse / ((m0 - payload) * GRAVITY);
     m.max_acceleration         = RocketState_.thrust / mf;
-    m.max_acceleration_g       = m.max_acceleration / G0;
+    m.max_acceleration_g       = m.max_acceleration / GRAVITY;
     m.exceeds_g_limit          = m.max_acceleration_g > 35.0;
 
     return m;

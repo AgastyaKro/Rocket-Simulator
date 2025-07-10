@@ -1,6 +1,8 @@
 #pragma once
 #include "RocketStage.hpp"
+#include <iostream>
 
+// need to update this to a class
 struct RocketState {
     double time;
     double position;
@@ -14,6 +16,9 @@ struct RocketState {
     double net_force;
     double weight;
     double drag = 0.0; 
+
+    // Functions
+    std::string to_csv_row() const;
 };
 
 RocketState compute_state(double time, double position, double velocity,
