@@ -4,6 +4,7 @@ constexpr double GRAVITY = 9.81;
 
 RocketSimulator::RocketSimulator(RocketStage stage, double dt)  : stage(stage), dt(dt), time(0.0), position(0.0), velocity(0.0){}
 
+
 void RocketSimulator::log_state(std::ostream& out, double mass, double acceleration){
     out << time << "," << position << "," << velocity << "," << acceleration << "," << mass << "\n";
 }

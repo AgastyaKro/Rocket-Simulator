@@ -3,17 +3,18 @@
 
 constexpr double GRAVITY = 9.81;
 
-void print_engineering_report(const RocketStage& stage, double payload) {
+void print_engineering_report(const RocketStage& stage,
+                              const RocketState& state,
+                              double payload) {
     double m0 = stage.dry_mass + stage.fuel_mass;
-    double mf = m0 - stage.fuel_mass;
+    double mf = state.mass;  // initial_state.mass = m0 unless analyzing mid-flight
     double burn_time = stage.burn_time;
     double isp = stage.isp;
-    double g0 = GRAVITY;
-    double c = isp * g0;
-    double propellant_mass = stage.fuel_mass;
-    double mdot = propellant_mass / burn_time;
-    double thrust = mdot * c;
+    double c = isp * GRAVITY;
+    double mdot = state.mass_flow_rate;
+    double thrust = state.thrust;
     double total_impulse = thrust * burn_time;
+    double propellant_mass = stage.fuel_mass;
 
     std::cout << "--- Engineering Analysis ---\n";
     std::cout << "Initial mass (m0): " << m0 << " kg\n";
@@ -27,9 +28,9 @@ void print_engineering_report(const RocketStage& stage, double payload) {
     double MR_vehicle = mf / m0;
     double MR_propulsion = (mf - payload) / (m0 - payload);
     double zeta = propellant_mass / (m0 - payload);
-    double impulse_to_weight = total_impulse / ((m0 - payload) * g0);
+    double impulse_to_weight = total_impulse / ((m0 - payload) * GRAVITY);
     double max_acceleration = thrust / mf;
-    double max_accel_g = max_acceleration / g0;
+    double max_accel_g = max_acceleration / GRAVITY;
 
     std::cout << "Vehicle mass ratio: " << MR_vehicle << "\n";
     std::cout << "Propulsion unit mass ratio: " << MR_propulsion << "\n";
