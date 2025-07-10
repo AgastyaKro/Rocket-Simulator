@@ -10,6 +10,7 @@ void RocketSimulator::log_state(std::ostream& out, double mass, double accelerat
 }
 
 void RocketSimulator::run_simulation(std::ostream& out){
+    
     out << "time,position,velocity,acceleration,mass\n";
 
     double fuel_mass = stage.fuel_mass;           // track fuel separately
