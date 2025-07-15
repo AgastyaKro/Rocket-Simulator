@@ -19,6 +19,7 @@ class Environment{
         Environment();
         Environment(double EnvTemperature_, double EnvPressure_, double EnvAltitude_, double EnvDensity_);
 
+
         // Functions
         const double getEnvTemperature();
         const double getEnvPressure();
