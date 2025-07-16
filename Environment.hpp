@@ -4,11 +4,21 @@
 #include "Constants.hpp"
 
 class Environment{
+    struct startingEnv{
+        double Temperature;
+        double Pressure;
+        double Altitude;
+        double Density;
+    };
+
     private:
         double EnvTemperature;
         double EnvPressure;
         double EnvAltitude;
         double EnvDensity;
+        
+        startingEnv initialConditions;
+
         
         // internal helper
         void computeEnvAtmosphere();
@@ -17,7 +27,7 @@ class Environment{
     public:
         // Constructors
         Environment();
-        Environment(double EnvTemperature_, double EnvPressure_, double EnvAltitude_, double EnvDensity_);
+        Environment(double startingEnvTemperature, double EnvPressure_, double EnvAltitude_, double EnvDensity_);
 
 
         // Functions
@@ -25,7 +35,7 @@ class Environment{
         const double getEnvPressure();
         const double getEnvAltitude();
         const double getEnvDensity();
-        void updateEnvAltitude(int newAltitude);
+        void updateEnvAltitude(double newAltitude);
 };
 
 #endif
