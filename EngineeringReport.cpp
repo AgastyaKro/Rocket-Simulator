@@ -1,6 +1,6 @@
 #include "EngineeringReport.hpp"
 #include "Constants.hpp"
-
+#include "Environment.hpp"
 #include <iostream>
 
 // Compute metrics
@@ -8,6 +8,7 @@ EngineeringMetrics compute_engineering_metrics(const RocketStage& RocketStage_,
                                               const RocketState& RocketState_,
                                               double payload){
     EngineeringMetrics m{};
+    Environment EnvObject;
 
     const double m0 = RocketStage_.dry_mass + RocketStage_.fuel_mass;
     const double mf = RocketState_.mass;               // after burn (initial_state == t0 -> mf == m0)
@@ -18,9 +19,9 @@ EngineeringMetrics compute_engineering_metrics(const RocketStage& RocketStage_,
     m.MR_vehicle               = mf / m0;
     m.MR_propulsion            = (mf - payload) / (m0 - payload);
     m.propellant_mass_fraction = RocketStage_.fuel_mass / (m0 - payload);
-    m.exhaust_velocity         = c;
+    m.exhaust_velocity         = c; // also know as v2 in the book (velocity of gas leaving nozzle)
     m.mass_flow_rate           = mdot;
-    m.thrust                   = RocketState_.thrust;
+    m.thrust                   = mdot * c + ( - EnvObject.getEnvPressure()) * RocketStage_.exit_nozzle_area;
     m.total_impulse            = total_impulse;
     m.impulse_to_weight_ratio  = total_impulse / ((m0 - payload) * GRAVITY);
     m.max_acceleration         = RocketState_.thrust / mf;
