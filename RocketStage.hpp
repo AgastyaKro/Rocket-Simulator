@@ -9,7 +9,7 @@ struct RocketStage{
     double fuel_mass;   // kg
     double dry_mass;    // kg
     double isp;         // seconds 
-    double exit_nozzle_area{.5}; // m^2, A2
+    double nozzle_exit_area{.5}; // m^2, A2
     double nozzle_throat_area{0.025}; // m^2, At
     double nozzle_gas_pressure; // Pa
     const double starting_chamber_pressure{7e6};
@@ -19,7 +19,7 @@ struct RocketStage{
 
     RocketStage(double thrust_, double burn_time_, double fuel_mass_, double dry_mass_, double isp_, double exit_nozzle_area_)
             : thrust(thrust_), burn_time(burn_time_), fuel_mass(fuel_mass_), 
-              dry_mass(dry_mass_), isp(isp_), exit_nozzle_area(exit_nozzle_area_) {}
+              dry_mass(dry_mass_), isp(isp_), nozzle_exit_area(exit_nozzle_area_) {}
 
     double get_total_mass(){ 
         return dry_mass + fuel_mass;

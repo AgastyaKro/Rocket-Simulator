@@ -21,7 +21,7 @@ EngineeringMetrics compute_engineering_metrics(const RocketStage& RocketStage_,
     m.propellant_mass_fraction = RocketStage_.fuel_mass / (m0 - payload);
     m.exhaust_velocity         = c; // also know as v2 in the book (velocity of gas leaving nozzle)
     m.mass_flow_rate           = mdot;
-    m.thrust                   = mdot * c + ( - EnvObject.getEnvPressure()) * RocketStage_.exit_nozzle_area;
+    m.thrust                   = mdot * c + (RocketStage_.nozzle_gas_pressure-EnvObject.getEnvPressure()) * RocketStage_.nozzle_exit_area;
     m.total_impulse            = total_impulse;
     m.impulse_to_weight_ratio  = total_impulse / ((m0 - payload) * GRAVITY);
     m.max_acceleration         = RocketState_.thrust / mf;
